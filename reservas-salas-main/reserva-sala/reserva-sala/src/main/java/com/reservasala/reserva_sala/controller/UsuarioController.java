@@ -1,29 +1,32 @@
 package com.reservasala.reserva_sala.controller;
 
 import com.reservasala.reserva_sala.model.Usuario;
-import com.reservasala.reserva_sala.service.UsuarioService;
+import com.reservasala.usuario.service.UsuarioService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-@RequestMapping("/usuarios")
+@RestController
+@RequestMapping("/api/usuarios")
 public class UsuarioController {
     @Autowired
     private UsuarioService service;
 
     @GetMapping
-    public String listar(Model model) {
-        model.addAttribute("usuarios", service.listar());
-        return "usuarios";
+    public ResponseEntity<List<Usuario>> listar() {
+        return ResponseEntity.ok(service.listar());
     }
 
     @PostMapping("/salvar")
-    public String salvar(Usuario usuario) {
-        service.salvar(usuario);
-        return "redirect:/usuarios";
+    public ResponseEntity<Usuario> salvar(@RequestBody Usuario usuario) {
+        Usuario novoUsuario = service.salvar(usuario);
+        return ResponseEntity.ok(novoUsuario);
     }
 }

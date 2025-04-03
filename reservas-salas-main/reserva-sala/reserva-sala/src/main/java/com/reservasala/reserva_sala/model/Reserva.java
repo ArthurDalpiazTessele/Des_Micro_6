@@ -15,15 +15,11 @@ public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     private LocalDateTime dataHora;
 
-    @ManyToOne
-    @JoinColumn(name = "sala_id")
-    private Sala sala;
+    private Long salaId;  // Referência ao ID da sala (evitando forte acoplamento)
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
-
+    private Long usuarioId;  // Referência ao ID do usuário (evitando forte acoplamento)
 
 }

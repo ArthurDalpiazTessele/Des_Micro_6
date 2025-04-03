@@ -19,6 +19,7 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
     private String email;
     private String senha;
@@ -30,7 +31,6 @@ public class Usuario {
     private String cpf;
     private LocalDate dataNascimento;
     private LocalDate dataCadastro;
-
 
     public void setNome(String nome) {
         if (nome == null || nome.trim().length() < 3) {
